@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Center Devices Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .wrong {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Data Center Devices Quiz</h1>
+    
+    <form id="quizForm">
+        <div class="question">
+            <p>1. What is the primary function of a router?</p>
+            <input type="radio" name="q1" value="correct"> Route data between different IP subnets<br>
+            <input type="radio" name="q1" value="wrong"> Forward data based on MAC addresses<br>
+            <input type="radio" name="q1" value="wrong"> Manage wireless connections<br>
+        </div>
+
+        <div class="question">
+            <p>2. What is a layer 3 switch?</p>
+            <input type="radio" name="q2" value="wrong"> A switch that only handles wireless traffic<br>
+            <input type="radio" name="q2" value="correct"> A switch that includes routing functionality<br>
+            <input type="radio" name="q2" value="wrong"> A router designed for fiber connections<br>
+        </div>
+
+        <div class="question">
+            <p>3. What does a Next-Generation Firewall (NGFW) identify?</p>
+            <input type="radio" name="q3" value="correct"> Applications traversing the network<br>
+            <input type="radio" name="q3" value="wrong"> Network devices based on MAC addresses<br>
+            <input type="radio" name="q3" value="wrong"> Wireless network signals<br>
+        </div>
+
+        <div class="question">
+            <p>4. What does a load balancer do?</p>
+            <input type="radio" name="q4" value="correct"> Distributes traffic across multiple servers<br>
+            <input type="radio" name="q4" value="wrong"> Encrypts network traffic<br>
+            <input type="radio" name="q4" value="wrong"> Acts as a VPN<br>
+        </div>
+
+        <div class="question">
+            <p>5. What is the role of a proxy server?</p>
+            <input type="radio" name="q5" value="wrong"> Routes traffic across IP subnets<br>
+            <input type="radio" name="q5" value="wrong"> Detects and blocks intrusions<br>
+            <input type="radio" name="q5" value="correct"> Performs requests on behalf of users<br>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="submitQuiz()">Submit</button>
+    </form>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        var form = document.getElementById('quizForm');
+        var result = document.getElementById('result');
+        var score = 0;
+        var feedback = '';
+        
+        var answers = {
+            q1: 'correct',
+            q2: 'correct',
+            q3: 'correct',
+            q4: 'correct',
+            q5: 'correct'
+        };
+
+        for (var i = 1; i <= 5; i++) {
+            var question = form['q' + i];
+            var selected = document.querySelector('input[name="q' + i + '"]:checked');
+
+            if (selected) {
+                if (selected.value === answers['q' + i]) {
+                    score++;
+                    feedback += '<p class="correct">Question ' + i + ': Correct!</p>';
+                } else {
+                    feedback += '<p class="wrong">Question ' + i + ': Wrong!</p>';
+                }
+            } else {
+                feedback += '<p class="wrong">Question ' + i + ': You did not answer this question.</p>';
+            }
+        }
+
+        result.innerHTML = 'Your score is: ' + score + '/5<br>' + feedback;
+    }
+</script>
+
+</body>
+</html>
